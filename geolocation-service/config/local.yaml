@@ -1,0 +1,27 @@
+local:
+  port: 8080
+db:
+  host: "postgres"
+  port: "5432"
+  username: "postgres"
+  password: "postgres"
+  dbname: "postgres"
+  sslmode: "disable"
+  driver: "postgres"
+  timeout: 60s
+redis:
+  host: "redis"
+  port: "6379"
+  timeout: 60s
+kafka:
+  brokers: ["kafka:9092"]
+  topic: "geo"
+payments:
+  publishable key: "pk_test_51PmxyQRrRUfKJRjmBfF4LdP8DUKKSdGm22nXoST2vRhyv9ZT2crBzWDDddqd1WyUrfziJ2FaCClyNcf3my61OJmt00X1gtf3IK"
+  secret key: "sk_test_51PmxyQRrRUfKJRjmxTXcKmfujq2JbtKSMr5iid5HoBNBJWGrCLmcgxiieUtlgOP8UUHq0D5C0xH6AxRJk6v1JalD00MXfVgAXZ"
+  productID: "prod_QeGm4BNrbmKSZq"     
+  paymentMethodID: "pm_1MqLiJLkdIwHu7ixUEgbFdYF"
+  trialEnd: 0
+ 
+
+ 

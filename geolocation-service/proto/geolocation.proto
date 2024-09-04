@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package geolocation;
+
+option go_package = "geolocation/proto;proto";
+
+import "google/protobuf/timestamp.proto";
+
+// Определение сервиса GeolocationService
+service GeolocationService {
+  // Обновление геолокации текущего пользователя
+  rpc UpdateGeolocation(UpdateGeolocationRequest) returns (UpdateGeolocationResponse);
+
+  // Поиск пользователей поблизости
+  rpc FindNearbyUsers(FindNearbyUsersRequest) returns (FindNearbyUsersResponse);
+
+  // Получение текущей геолокации пользователя по его ID
+  rpc GetUserLocation(GetUserLocationRequest) returns (GetUserLocationResponse);
+
+  // Поделиться своей геолокацией с другим пользователем
+  rpc ShareLocation(ShareLocationRequest) returns (ShareLocationResponse);
+
+  // Прекратить делиться своей геолокацией с другим пользователем
+  rpc StopSharingLocation(StopSharingLocationRequest) returns (StopSharingLocationResponse);
+
+  // Настройка конфиденциальности геолокации
+  rpc SetLocationPrivacy(SetLocationPrivacyRequest) returns (SetLocationPrivacyResponse);
+
+  // Получение истории геолокаций текущего пользователя
+  rpc GetLocationHistory(GetLocationHistoryRequest) returns (GetLocationHistoryResponse);
+
+  // Очистка истории геолокаций текущего пользователя
+  rpc ClearLocationHistory(ClearLocationHistoryRequest) returns (ClearLocationHistoryResponse);
+}
+
+// Сообщения
+
+message UpdateGeolocationRequest {
+  int64 user_id = 1;
+  double latitude = 2;
+  double longitude = 3;
+}
+
+message UpdateGeolocationResponse {
+  string message = 1;
+}
+
+message FindNearbyUsersRequest {
+  int64 user_id = 1;
+   int64 resolution = 2; //радиус поиска (индекс от 1 до 16, где 9 - 1.22км)
+}
+
+message NearbyUser {
+  int64 id = 1; 
+  double distance = 3;
+}
+
+message FindNearbyUsersResponse {
+  repeated NearbyUser users = 1;
+}
+
+message GetUserLocationRequest {
+  int64 idresp = 1;
+  int64 idTarget = 2;
+}
+
+message UserLocation {
+  int64 id = 1;
+  double latitude = 2;
+  double longitude = 3;
+}
+
+message GetUserLocationResponse {
+  UserLocation location = 1;
+}
+
+message ShareLocationRequest {
+  int64 idresp = 1;
+  int64 idTarget = 2;
+   google.protobuf.Timestamp timeEnd = 3;
+}
+
+message ShareLocationResponse {
+  string message = 1;
+}
+
+message StopSharingLocationRequest {
+  int64 user_id = 1;
+  int64 receiverId = 2;
+}
+
+message StopSharingLocationResponse {
+  string message = 1;
+}
+
+message SetLocationPrivacyRequest {
+  int64 user_id = 1;
+  string visibility = 2;
+}
+// visibility = "public", "private", "friends"
+
+message SetLocationPrivacyResponse {
+  string message = 1;
+}
+
+message LocationHistory {
+  google.protobuf.Timestamp timestamp = 1;
+  double latitude = 2;
+  double longitude = 3;
+}
+
+message GetLocationHistoryRequest {
+  int64 user_id = 1;
+}
+
+message GetLocationHistoryResponse {
+  repeated LocationHistory history = 1;
+}
+
+message ClearLocationHistoryRequest {
+  int64 user_id = 1;
+}
+
+message ClearLocationHistoryResponse {
+  string message = 1;
+}
