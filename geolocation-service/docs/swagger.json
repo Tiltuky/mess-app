@@ -1,0 +1,438 @@
+{
+  "swagger": "2.0",
+  "info": {},
+  "paths": {
+    "/geolocation/history": {
+      "get": {
+        "tags": [
+          "geolocation"
+        ],
+        "summary": "Получение истории геолокаций текущего пользователя.",
+        "operationId": "getLocationHistoryRequest",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/getLocationHistoryResponse"
+          },
+          "500": {
+            "description": " Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "geolocation"
+        ],
+        "summary": "Очистка истории геолокаций текущего пользователя.",
+        "operationId": "clearLocationHistoryRequest",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/clearLocationHistoryResponse"
+          },
+          "500": {
+            "description": " Internal server error"
+          }
+        }
+      }
+    },
+    "/geolocation/nearby": {
+      "get": {
+        "tags": [
+          "geolocation"
+        ],
+        "summary": "Поиск пользователей поблизости.",
+        "operationId": "findNearbyUsersRequest",
+        "parameters": [
+          {
+            "type": "number",
+            "format": "double",
+            "x-go-name": "Radius",
+            "name": "radius",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/findNearbyUsersResponse"
+          },
+          "400": {
+            "description": " Bad request"
+          },
+          "500": {
+            "description": " Internal server error"
+          }
+        }
+      }
+    },
+    "/geolocation/privacy": {
+      "post": {
+        "tags": [
+          "geolocation"
+        ],
+        "summary": "Настройка конфиденциальности геолокации.",
+        "operationId": "setLocationPrivacyRequest",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SetLocationPrivacyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/setLocationPrivacyResponse"
+          },
+          "400": {
+            "description": " Bad request"
+          },
+          "500": {
+            "description": " Internal server error"
+          }
+        }
+      }
+    },
+    "/geolocation/share": {
+      "post": {
+        "tags": [
+          "geolocation"
+        ],
+        "summary": "Поделиться своей геолокацией с другим пользователем.",
+        "operationId": "shareLocationRequest",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ShareLocationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/shareLocationResponse"
+          },
+          "400": {
+            "description": " Bad request"
+          },
+          "500": {
+            "description": " Internal server error"
+          }
+        }
+      }
+    },
+    "/geolocation/share/stop": {
+      "post": {
+        "tags": [
+          "geolocation"
+        ],
+        "summary": "Прекратить делиться своей геолокацией с другим пользователем.",
+        "operationId": "stopSharingLocationRequest",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/StopSharingLocationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/stopSharingLocationResponse"
+          },
+          "400": {
+            "description": " Bad request"
+          },
+          "500": {
+            "description": " Internal server error"
+          }
+        }
+      }
+    },
+    "/geolocation/update": {
+      "post": {
+        "tags": [
+          "geolocation"
+        ],
+        "summary": "Обновление геолокации текущего пользователя.",
+        "operationId": "updateGeolocationRequest",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateGeolocationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/updateGeolocationResponse"
+          },
+          "400": {
+            "description": " Bad request"
+          },
+          "500": {
+            "description": " Internal server error"
+          }
+        }
+      }
+    },
+    "/geolocation/user/{id}": {
+      "get": {
+        "tags": [
+          "geolocation"
+        ],
+        "summary": "Получение текущей геолокации пользователя по его ID.",
+        "operationId": "getUserLocationRequest",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/getUserLocationResponse"
+          },
+          "400": {
+            "description": " Bad request"
+          },
+          "404": {
+            "description": " Not found"
+          },
+          "500": {
+            "description": " Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClearLocationHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "x-go-name": "Message"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "LocationHistory": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Longitude"
+        },
+        "timestamp": {
+          "type": "string",
+          "x-go-name": "Timestamp"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "NearbyUser": {
+      "type": "object",
+      "properties": {
+        "distance": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Distance"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "username": {
+          "type": "string",
+          "x-go-name": "Username"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "SetLocationPrivacyRequest": {
+      "type": "object",
+      "properties": {
+        "visibility": {
+          "type": "string",
+          "x-go-name": "Visibility"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "SetLocationPrivacyResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "x-go-name": "Message"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "ShareLocationRequest": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Longitude"
+        },
+        "userId": {
+          "type": "string",
+          "x-go-name": "UserID"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "ShareLocationResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "x-go-name": "Message"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "StopSharingLocationRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "x-go-name": "UserID"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "StopSharingLocationResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "x-go-name": "Message"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "UpdateGeolocationRequest": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Longitude"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "UpdateGeolocationResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "x-go-name": "Message"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    },
+    "UserLocation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Longitude"
+        }
+      },
+      "x-go-package": "progekt/dating-app/geolocation-service/docs"
+    }
+  },
+  "responses": {
+    "clearLocationHistoryResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/ClearLocationHistoryResponse"
+      }
+    },
+    "findNearbyUsersResponse": {
+      "description": "",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/NearbyUser"
+        }
+      }
+    },
+    "getLocationHistoryResponse": {
+      "description": "",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/LocationHistory"
+        }
+      }
+    },
+    "getUserLocationResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/UserLocation"
+      }
+    },
+    "setLocationPrivacyResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/SetLocationPrivacyResponse"
+      }
+    },
+    "shareLocationResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/ShareLocationResponse"
+      }
+    },
+    "stopSharingLocationResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/StopSharingLocationResponse"
+      }
+    },
+    "updateGeolocationResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/UpdateGeolocationResponse"
+      }
+    }
+  }
+}

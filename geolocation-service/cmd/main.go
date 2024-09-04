@@ -1,12 +1,12 @@
 package main
 
 import (
-	"geolocation-service/config"
-	"geolocation-service/internal/infrastructure/cache"
-	"geolocation-service/internal/infrastructure/db/postgres"
-	"geolocation-service/run"
 	"os"
 	"os/signal"
+	"progekt/dating-app/geolocation-service/config"
+	"progekt/dating-app/geolocation-service/internal/infrastructure/cache"
+	"progekt/dating-app/geolocation-service/internal/infrastructure/db/postgres"
+	"progekt/dating-app/geolocation-service/run"
 	"syscall"
 
 	"go.uber.org/zap"

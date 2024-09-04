@@ -3,14 +3,14 @@ package run
 import (
 	"fmt"
 
-	"geolocation-service/config"
-	kafkaConn "geolocation-service/internal/infrastructure/kafka"
-	grpcgeo "geolocation-service/internal/modules/geoservice/gRPC"
-	"geolocation-service/internal/modules/geoservice/service"
-	"geolocation-service/internal/modules/geoservice/storage"
-	pServ "geolocation-service/internal/modules/payment/service"
-	pStor "geolocation-service/internal/modules/payment/storage"
 	"net"
+	"progekt/dating-app/geolocation-service/config"
+	kafkaConn "progekt/dating-app/geolocation-service/internal/infrastructure/kafka"
+	grpcgeo "progekt/dating-app/geolocation-service/internal/modules/geoservice/gRPC"
+	"progekt/dating-app/geolocation-service/internal/modules/geoservice/service"
+	"progekt/dating-app/geolocation-service/internal/modules/geoservice/storage"
+	pServ "progekt/dating-app/geolocation-service/internal/modules/payment/service"
+	pStor "progekt/dating-app/geolocation-service/internal/modules/payment/storage"
 
 	"github.com/go-redis/redis"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"

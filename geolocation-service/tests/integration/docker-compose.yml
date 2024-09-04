@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  postgrestest:
+    container_name: postgrestest
+    image: postgres:13
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+
+  redistest:
+    container_name: redistest
+    image: redis:6
+    ports:
+      - "6378:6379"

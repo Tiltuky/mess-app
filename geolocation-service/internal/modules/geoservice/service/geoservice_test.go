@@ -2,16 +2,16 @@ package service
 
 import (
 	"errors"
-	"geolocation-service/internal/models"
-	"geolocation-service/internal/modules/geoservice/service/mocks"
-	"geolocation-service/internal/modules/geoservice/storage"
+	"progekt/dating-app/geolocation-service/internal/models"
+	"progekt/dating-app/geolocation-service/internal/modules/geoservice/service/mocks"
+	"progekt/dating-app/geolocation-service/internal/modules/geoservice/storage"
 
 	"testing"
 	"time"
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
-	"github.com/uber/h3-go/v4"
+	h3 "github.com/uber/h3-go/v4"
 )
 
 func TestGeoService_UpdateGeolocation(t *testing.T) {

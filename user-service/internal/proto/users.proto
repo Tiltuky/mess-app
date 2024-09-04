@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package usersPB;
+
+option go_package = "./usersPB";
+
+service UsersService {
+  rpc RegisterUser (User) returns (RegisterResponse) {}
+  rpc LoginUser (LoginRequest) returns (LoginResponse) {}
+  rpc GetById (GetByIdRequest) returns (User) {}
+  rpc UpdateUser (UpdateUserRequest) returns (MsgResponse) {}
+  rpc DeleteUser (GetByIdRequest) returns (MsgResponse) {}
+  rpc ListUsers (ListRequest) returns (ListResponse) {}
+  rpc GetProfileById (GetByIdRequest) returns (Profile) {}
+  rpc UpdateProfile (UpdateProfileRequest) returns (MsgResponse) {}
+  rpc UploadAvatar (UploadAvatarRequest) returns (MsgResponse) {}
+  rpc SearchUser (SearchRequest) returns (ListResponse) {}
+}
+
+message User {
+  int64 Id = 1;
+  string Username = 2;
+  string Firstname = 3;
+  string Lastname = 4;
+  string Email = 5;
+  string Phone = 6;
+  string City = 7;
+  string Password = 8;
+  string Role = 9;
+  string AvatarURL = 10;
+  int64 CreatedAt = 11;
+  int64 DeletedAt = 12;
+}
+
+message Profile {
+  int64 Id = 1;
+  string Username = 2;
+  string Firstname = 3;
+  string Lastname = 4;
+  string Email = 5;
+  string Phone = 6;
+  string City = 7;
+  string Role =8;
+  string AvatarURL = 9;
+}
+
+// Requests
+
+message LoginRequest {
+  string Email = 1;
+  string Password = 2;
+}
+
+message UpdateUserRequest {
+  User UpdatedUser = 1;
+}
+
+message UpdateProfileRequest {
+  Profile UpdatedUser = 1;
+}
+
+message GetByIdRequest {
+  int64 Id = 1;
+}
+
+message ListRequest {
+
+}
+
+message UploadAvatarRequest {
+  int64 Id = 1;
+  bytes Img = 2;
+  string Filename = 3;
+}
+
+message SearchRequest {
+  string Username = 1;
+}
+// Responses
+
+message  LoginResponse {
+  string Token = 1;
+  int64 ExpiredAt = 2;
+}
+
+message RegisterResponse {
+  int64 Id = 1;
+}
+
+message ListResponse {
+  repeated User Users = 1;
+}
+
+message MsgResponse {
+  string Msg = 1;
+}

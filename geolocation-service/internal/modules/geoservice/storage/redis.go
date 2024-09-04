@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"geolocation-service/internal/models"
+	"progekt/dating-app/geolocation-service/internal/models"
 	"strconv"
 	"time"
 

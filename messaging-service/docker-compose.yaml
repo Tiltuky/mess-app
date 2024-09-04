@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mess:
+    build: ./
+    networks:
+      - internal
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - 8080:8080
+     
+
+  redis:
+    image: redis:alpine
+    networks:
+      - internal
+
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5436:5436"
+    networks:
+      - internal
+  
+
+networks:
+  internal:
+    external: true

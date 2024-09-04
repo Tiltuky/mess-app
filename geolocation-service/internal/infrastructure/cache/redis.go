@@ -1,7 +1,7 @@
 package cache
 
 import (
-	"geolocation-service/config"
+	"progekt/dating-app/geolocation-service/config"
 
 	"github.com/go-redis/redis"
 )

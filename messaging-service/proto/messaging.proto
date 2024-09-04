@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package messaging;
+
+option go_package = "./messaging";
+
+service MessagingService {
+  // Получение сообщений в чате по ID чата
+  rpc GetMessages (GetMessagesRequest) returns (GetMessagesResponse);
+
+  // Отправка сообщения в чат по ID чата
+  rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+
+  // Удаление сообщения по ID сообщения в чате
+  rpc DeleteMessage (DeleteMessageRequest) returns (DeleteMessageResponse);
+
+  // Получение списка чатов текущего пользователя
+  rpc GetChats (GetChatsRequest) returns (GetChatsResponse);
+
+  // Создание нового чата
+  rpc CreateChat (CreateChatRequest) returns (CreateChatResponse);
+
+  // Получение информации о чате по ID
+  rpc GetChatInfo (GetChatInfoRequest) returns (GetChatInfoResponse);
+
+  // Удаление чата по ID
+  rpc DeleteChat (DeleteChatRequest) returns (DeleteChatResponse);
+}
+
+message Message {
+  int64 id = 1;
+  int64 chat_id = 2;
+  int64 sender_id = 3;
+  string content = 4;
+  string timestamp = 5;
+}
+
+message Chat {
+  int64 id = 1;
+  string name = 2;
+  string created_at = 3;
+}
+
+message ChatMember {
+  int64 id = 1;
+  int64 chat_id = 2;
+  int64 user_id = 3;
+}
+
+// Requests and Responses for Messaging
+message GetMessagesRequest {
+  int64 chat_id = 1;
+}
+
+message GetMessagesResponse {
+  repeated Message messages = 1;
+}
+
+message SendMessageRequest {
+  int64 chat_id = 1;
+  int64 sender_id = 2;
+  string content = 3;
+}
+
+message SendMessageResponse {
+  Message message = 1;
+}
+
+message DeleteMessageRequest {
+  int64 chat_id = 1;
+  int64 message_id = 2;
+}
+
+message DeleteMessageResponse {
+  string status = 1;
+}
+
+// Requests and Responses for Chats
+message GetChatsRequest {
+  int64 user_id = 1;
+}
+
+message GetChatsResponse {
+  repeated Chat chats = 1;
+}
+
+message CreateChatRequest {
+  string name = 1;
+}
+
+message CreateChatResponse {
+  Chat chat = 1;
+}
+
+message GetChatInfoRequest {
+  int64 chat_id = 1;
+}
+
+message GetChatInfoResponse {
+  Chat chat = 1;
+}
+
+message DeleteChatRequest {
+  int64 chat_id = 1;
+}
+
+message DeleteChatResponse {
+  string status = 1;
+}

@@ -1,0 +1,209 @@
+basePath: /
+definitions:
+  models.Chat:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  models.Message:
+    properties:
+      chat_id:
+        type: string
+      content:
+        type: string
+      id:
+        type: integer
+      sender_id:
+        type: string
+      timestamp:
+        type: string
+    type: object
+  responder.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API для управления сообщениями и чатами
+  title: Messages and Chats API
+  version: "1.0"
+paths:
+  /chats:
+    get:
+      description: Получение списка чатов текущего пользователя
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Chat'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+      summary: Get Chats
+      tags:
+      - Chats
+    post:
+      description: Создание нового чата
+      parameters:
+      - description: Chat Input
+        in: body
+        name: chat
+        required: true
+        schema:
+          $ref: '#/definitions/models.Chat'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Chat'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+      summary: Create Chat
+      tags:
+      - Chats
+  /chats/{id}:
+    delete:
+      description: Удаление чата по ID
+      parameters:
+      - description: Chat ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+      summary: Delete Chat
+      tags:
+      - Chats
+    get:
+      description: Получение информации о чате по ID
+      parameters:
+      - description: Chat ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Chat'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+      summary: Get Chat Information
+      tags:
+      - Chats
+  /messages/{chat_id}:
+    get:
+      description: Получение сообщений в чате по ID чата
+      parameters:
+      - description: Chat ID
+        in: path
+        name: chat_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Message'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+      summary: Get Messages
+      tags:
+      - Messages
+    post:
+      description: Отправка сообщения в чат по ID чата
+      parameters:
+      - description: Chat ID
+        in: path
+        name: chat_id
+        required: true
+        type: string
+      - description: Message Input
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/models.Message'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+      summary: Send Message
+      tags:
+      - Messages
+  /messages/{chat_id}/{msg_id}:
+    delete:
+      description: Удаление сообщения по ID сообщения в чате
+      parameters:
+      - description: Chat ID
+        in: path
+        name: chat_id
+        required: true
+        type: string
+      - description: Message ID
+        in: path
+        name: msg_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.ErrorResponse'
+      summary: Delete Message
+      tags:
+      - Messages
+swagger: "2.0"

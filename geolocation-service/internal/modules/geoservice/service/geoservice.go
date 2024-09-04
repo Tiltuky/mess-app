@@ -5,15 +5,15 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"geolocation-service/internal/models"
-	"geolocation-service/internal/modules/geoservice/storage"
 	"log"
+	"progekt/dating-app/geolocation-service/internal/models"
+	"progekt/dating-app/geolocation-service/internal/modules/geoservice/storage"
 
 	"sort"
 	"strconv"
 	"time"
 
-	"github.com/uber/h3-go/v4"
+	h3 "github.com/uber/h3-go/v4"
 )
 
 //go:generate mockgen -source=geoservice.go -destination=mocks/mock_geoservice.go -package=mocks

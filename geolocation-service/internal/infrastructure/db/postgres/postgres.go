@@ -3,8 +3,8 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
-	"geolocation-service/config"
 	"log"
+	"progekt/dating-app/geolocation-service/config"
 	"time"
 
 	"github.com/jackc/pgx/v4/pgxpool"
@@ -13,7 +13,7 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/pressly/goose"
 
-	_ "geolocation-service/internal/infrastructure/db/migrate"
+	_ "progekt/dating-app/geolocation-service/internal/infrastructure/db/migrate"
 )
 
 func NewPostgresDB(cfg *config.Config) (*sqlx.DB, error) {

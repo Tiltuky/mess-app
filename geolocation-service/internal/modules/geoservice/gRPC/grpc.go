@@ -2,8 +2,8 @@ package grpcgeo
 
 import (
 	"context"
-	"geolocation-service/internal/models"
-	"geolocation-service/proto/geolocation/proto"
+	"progekt/dating-app/geolocation-service/internal/models"
+	"progekt/dating-app/geolocation-service/proto/geolocation/proto"
 	"time"
 
 	"google.golang.org/grpc"

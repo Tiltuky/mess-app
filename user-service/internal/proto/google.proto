@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package googlePB;
+
+option go_package = "./googlePB";
+
+service GoogleService {
+  rpc Authenticate (AuthRequest) returns (AuthResponse) {}
+}
+
+message AuthRequest {
+  string accessToken = 1;
+  string pushToken = 2;
+}
+
+message  AuthResponse {
+  string Token = 1;
+  int64 ExpiredAt = 2;
+}

@@ -1,0 +1,7 @@
+httpServer:
+  httpHost: "localhost"
+  httpPort: "8080"
+
+grpcServer:
+  grpcHost: "localhost"
+  grpcPort: "50051"

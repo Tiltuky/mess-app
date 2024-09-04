@@ -1,0 +1,294 @@
+definitions:
+  ClearLocationHistoryResponse:
+    properties:
+      message:
+        type: string
+        x-go-name: Message
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  LocationHistory:
+    properties:
+      latitude:
+        format: double
+        type: number
+        x-go-name: Latitude
+      longitude:
+        format: double
+        type: number
+        x-go-name: Longitude
+      timestamp:
+        type: string
+        x-go-name: Timestamp
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  NearbyUser:
+    properties:
+      distance:
+        format: double
+        type: number
+        x-go-name: Distance
+      id:
+        type: string
+        x-go-name: ID
+      username:
+        type: string
+        x-go-name: Username
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  SetLocationPrivacyRequest:
+    properties:
+      visibility:
+        type: string
+        x-go-name: Visibility
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  SetLocationPrivacyResponse:
+    properties:
+      message:
+        type: string
+        x-go-name: Message
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  ShareLocationRequest:
+    properties:
+      latitude:
+        format: double
+        type: number
+        x-go-name: Latitude
+      longitude:
+        format: double
+        type: number
+        x-go-name: Longitude
+      userId:
+        type: string
+        x-go-name: UserID
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  ShareLocationResponse:
+    properties:
+      message:
+        type: string
+        x-go-name: Message
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  StopSharingLocationRequest:
+    properties:
+      userId:
+        type: string
+        x-go-name: UserID
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  StopSharingLocationResponse:
+    properties:
+      message:
+        type: string
+        x-go-name: Message
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  UpdateGeolocationRequest:
+    properties:
+      latitude:
+        format: double
+        type: number
+        x-go-name: Latitude
+      longitude:
+        format: double
+        type: number
+        x-go-name: Longitude
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  UpdateGeolocationResponse:
+    properties:
+      message:
+        type: string
+        x-go-name: Message
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+  UserLocation:
+    properties:
+      id:
+        type: string
+        x-go-name: ID
+      latitude:
+        format: double
+        type: number
+        x-go-name: Latitude
+      longitude:
+        format: double
+        type: number
+        x-go-name: Longitude
+    type: object
+    x-go-package: progekt/dating-app/geolocation-service/docs
+info: {}
+paths:
+  /geolocation/history:
+    delete:
+      operationId: clearLocationHistoryRequest
+      responses:
+        "200":
+          $ref: '#/responses/clearLocationHistoryResponse'
+        "500":
+          description: ' Internal server error'
+      summary: Очистка истории геолокаций текущего пользователя.
+      tags:
+      - geolocation
+    get:
+      operationId: getLocationHistoryRequest
+      responses:
+        "200":
+          $ref: '#/responses/getLocationHistoryResponse'
+        "500":
+          description: ' Internal server error'
+      summary: Получение истории геолокаций текущего пользователя.
+      tags:
+      - geolocation
+  /geolocation/nearby:
+    get:
+      operationId: findNearbyUsersRequest
+      parameters:
+      - format: double
+        in: query
+        name: radius
+        type: number
+        x-go-name: Radius
+      responses:
+        "200":
+          $ref: '#/responses/findNearbyUsersResponse'
+        "400":
+          description: ' Bad request'
+        "500":
+          description: ' Internal server error'
+      summary: Поиск пользователей поблизости.
+      tags:
+      - geolocation
+  /geolocation/privacy:
+    post:
+      operationId: setLocationPrivacyRequest
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SetLocationPrivacyRequest'
+      responses:
+        "200":
+          $ref: '#/responses/setLocationPrivacyResponse'
+        "400":
+          description: ' Bad request'
+        "500":
+          description: ' Internal server error'
+      summary: Настройка конфиденциальности геолокации.
+      tags:
+      - geolocation
+  /geolocation/share:
+    post:
+      operationId: shareLocationRequest
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/ShareLocationRequest'
+      responses:
+        "200":
+          $ref: '#/responses/shareLocationResponse'
+        "400":
+          description: ' Bad request'
+        "500":
+          description: ' Internal server error'
+      summary: Поделиться своей геолокацией с другим пользователем.
+      tags:
+      - geolocation
+  /geolocation/share/stop:
+    post:
+      operationId: stopSharingLocationRequest
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/StopSharingLocationRequest'
+      responses:
+        "200":
+          $ref: '#/responses/stopSharingLocationResponse'
+        "400":
+          description: ' Bad request'
+        "500":
+          description: ' Internal server error'
+      summary: Прекратить делиться своей геолокацией с другим пользователем.
+      tags:
+      - geolocation
+  /geolocation/update:
+    post:
+      operationId: updateGeolocationRequest
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/UpdateGeolocationRequest'
+      responses:
+        "200":
+          $ref: '#/responses/updateGeolocationResponse'
+        "400":
+          description: ' Bad request'
+        "500":
+          description: ' Internal server error'
+      summary: Обновление геолокации текущего пользователя.
+      tags:
+      - geolocation
+  /geolocation/user/{id}:
+    get:
+      operationId: getUserLocationRequest
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+        x-go-name: ID
+      responses:
+        "200":
+          $ref: '#/responses/getUserLocationResponse'
+        "400":
+          description: ' Bad request'
+        "404":
+          description: ' Not found'
+        "500":
+          description: ' Internal server error'
+      summary: Получение текущей геолокации пользователя по его ID.
+      tags:
+      - geolocation
+responses:
+  clearLocationHistoryResponse:
+    description: ""
+    schema:
+      $ref: '#/definitions/ClearLocationHistoryResponse'
+  findNearbyUsersResponse:
+    description: ""
+    schema:
+      items:
+        $ref: '#/definitions/NearbyUser'
+      type: array
+  getLocationHistoryResponse:
+    description: ""
+    schema:
+      items:
+        $ref: '#/definitions/LocationHistory'
+      type: array
+  getUserLocationResponse:
+    description: ""
+    schema:
+      $ref: '#/definitions/UserLocation'
+  setLocationPrivacyResponse:
+    description: ""
+    schema:
+      $ref: '#/definitions/SetLocationPrivacyResponse'
+  shareLocationResponse:
+    description: ""
+    schema:
+      $ref: '#/definitions/ShareLocationResponse'
+  stopSharingLocationResponse:
+    description: ""
+    schema:
+      $ref: '#/definitions/StopSharingLocationResponse'
+  updateGeolocationResponse:
+    description: ""
+    schema:
+      $ref: '#/definitions/UpdateGeolocationResponse'
+swagger: "2.0"

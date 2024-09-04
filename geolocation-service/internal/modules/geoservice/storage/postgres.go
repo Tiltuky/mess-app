@@ -3,7 +3,7 @@ package storage
 import (
 	"context"
 	"fmt"
-	"geolocation-service/internal/models"
+	"progekt/dating-app/geolocation-service/internal/models"
 	"time"
 
 	"github.com/jmoiron/sqlx"

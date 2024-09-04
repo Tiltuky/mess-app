@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"geolocation-service/internal/models"
+	"progekt/dating-app/geolocation-service/internal/models"
 	"time"
 
 	"github.com/stripe/stripe-go"

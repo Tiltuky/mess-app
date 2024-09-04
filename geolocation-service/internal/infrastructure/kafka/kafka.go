@@ -3,8 +3,8 @@ package kafkaConn
 import (
 	"context"
 	"fmt"
-	"geolocation-service/internal/modules/geoservice/service"
 	"log"
+	"progekt/dating-app/geolocation-service/internal/modules/geoservice/service"
 
 	"github.com/segmentio/kafka-go"
 )
